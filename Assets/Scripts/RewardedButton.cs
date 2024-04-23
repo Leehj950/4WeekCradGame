@@ -64,6 +64,7 @@ public class RewardedButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
+            AudioManager.instance.GetAudioSource().Play();
             SceneManager.LoadScene("MainScene");
         }
     }

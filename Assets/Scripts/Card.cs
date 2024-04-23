@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Card : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Card : MonoBehaviour
     public Animator anim;
 
     public SpriteRenderer frontimage;
- 
+    bool iscolor;
 
     AudioSource audioSource;
     public AudioClip audioClip;
@@ -34,6 +35,11 @@ public class Card : MonoBehaviour
     }
     public void OpenCard()
     {
+        if (iscolor == false)
+        {
+            back.GetComponent<SpriteRenderer>().color = Color.gray;
+            iscolor = true;
+        }
         //텍스트 먼저 닫아준다.
         GameManager.instance.CloseTxt();
         if (GameManager.instance.secondCard != null) { return; }
@@ -46,6 +52,7 @@ public class Card : MonoBehaviour
         //firstCard가 비었다면
         if (GameManager.instance.firstCard == null)
         {
+            //firstCard가 내정보를 넘겨준다.
             GameManager.instance.firstCard = this;
         }
         else
@@ -53,8 +60,6 @@ public class Card : MonoBehaviour
             GameManager.instance.secondCard = this;
             GameManager.instance.Matched();
         }
-        //firstCard가 내정보를 넘겨준다.
-
     }
     public void DestroyCard()
     {
